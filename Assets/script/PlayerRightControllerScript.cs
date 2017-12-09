@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerRightControllerScript : MonoBehaviour
 {
-
+    
     public int points = 0;
     public int level = 1;
     public int currentNode = 0;
@@ -13,7 +13,7 @@ public class PlayerRightControllerScript : MonoBehaviour
     public ArrayList pentagramNodes = new ArrayList();
     public GameObject node;
     public Dictionary<int, ArrayList> nodeMap = new Dictionary<int, ArrayList>();
-
+    public DragoatMove dr;
 
     // Use this for initialization
     void Start()
@@ -77,11 +77,11 @@ public class PlayerRightControllerScript : MonoBehaviour
             {
                 points = 0;
                 level++;
+                dr.RightPlayerScored(1);
                 spawnPickups();
                 Debug.Log("Player 2 level: " + level);
             }
         }
-
     }
 
     private void buildNodeTable()
