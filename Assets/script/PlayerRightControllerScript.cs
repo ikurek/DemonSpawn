@@ -7,12 +7,13 @@ public class PlayerRightControllerScript : MonoBehaviour
 {
 
     public int points = 0;
-    public float maxSpeed = 10;
+    public int level = 1;
     public int currentNode = 0;
     public Rigidbody2D body;
     public ArrayList pentagramNodes = new ArrayList();
     public GameObject node;
     public Dictionary<int, ArrayList> nodeMap = new Dictionary<int, ArrayList>();
+
 
     // Use this for initialization
     void Start()
@@ -20,6 +21,7 @@ public class PlayerRightControllerScript : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         buildNodeTable();
         Debug.Log("Created Player 2!");
+        spawnPickups();
     }
 
     // Update is called once per frame
@@ -34,13 +36,13 @@ public class PlayerRightControllerScript : MonoBehaviour
             {
                 switch (kcode)
                 {
-                    case KeyCode.UpArrow:
+                    case KeyCode.LeftArrow:
                         node = availableNodes[1] as GameObject;
                         currentNode = pentagramNodes.IndexOf(node);
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
                         break;
 
-                    case KeyCode.LeftArrow:
+                    case KeyCode.UpArrow:
                         node = availableNodes[0] as GameObject;
                         currentNode = pentagramNodes.IndexOf(node);
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
@@ -58,14 +60,27 @@ public class PlayerRightControllerScript : MonoBehaviour
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
                         break;
                 }
-
-                Debug.Log("Node: " + currentNode);
             }
         }
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+
+        if (coll.gameObject.CompareTag("Pickup"))
+        {
+            // Destroy old pickup
+            Destroy(coll.gameObject);
+            points++;
+
+            if (points >= 4)
+            {
+                points = 0;
+                level++;
+                spawnPickups();
+                Debug.Log("Player 2 level: " + level);
+            }
+        }
 
     }
 
@@ -158,5 +173,15 @@ public class PlayerRightControllerScript : MonoBehaviour
         nodeMap.Add(8, listOf8);
         nodeMap.Add(9, listOf9);
 
+    }
+
+    private void spawnPickups()
+    {
+        var rng = new System.Random();
+
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
     }
 }

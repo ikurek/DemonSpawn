@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerLeftControllerScript : MonoBehaviour {
 
     public int points = 0;
-    public float maxSpeed = 10;
+    public int level = 1;
     public int currentNode = 0;
     public Rigidbody2D body;
     public ArrayList pentagramNodes = new ArrayList();
     public GameObject node;
     public Dictionary<int, ArrayList> nodeMap = new Dictionary<int, ArrayList>();
 
+
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody2D>();
         buildNodeTable();
         Debug.Log("Created Player 1!");
+        spawnPickups();
     }
 
     // Update is called once per frame
@@ -55,15 +58,28 @@ public class PlayerLeftControllerScript : MonoBehaviour {
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
                         break;
                 }
-
-                Debug.Log("Node: " + currentNode);
             }
         }
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-       
+
+        if (coll.gameObject.CompareTag("Pickup"))
+        {
+            // Destroy old pickup
+            Destroy(coll.gameObject);
+            points++;
+
+            if(points >= 4)
+            {
+                points = 0;
+                level++;
+                spawnPickups();
+                Debug.Log("Player 1 level: " + level);
+            }
+        }
+
     }
 
     private void buildNodeTable()
@@ -155,5 +171,15 @@ public class PlayerLeftControllerScript : MonoBehaviour {
         nodeMap.Add(8, listOf8);
         nodeMap.Add(9, listOf9);
 
+    }
+
+    private void spawnPickups()
+    {
+        var rng = new System.Random();
+
+        (Instantiate(GameObject.Find("PentagramLeft/PickupLeft") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+        (Instantiate(GameObject.Find("PentagramLeft/PickupLeft") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+        (Instantiate(GameObject.Find("PentagramLeft/PickupLeft") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+        (Instantiate(GameObject.Find("PentagramLeft/PickupLeft") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
     }
 }
