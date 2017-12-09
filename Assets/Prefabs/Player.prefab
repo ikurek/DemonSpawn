@@ -90,10 +90,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 0
-  maxSpeed: 5
+  level: 1
+  currentNode: 0
   body: {fileID: 0}
-  hasElement: 0
-  pickedObject: {fileID: 0}
+  node: {fileID: 0}
 --- !u!212 &212928267331571224
 SpriteRenderer:
   m_ObjectHideFlags: 1
