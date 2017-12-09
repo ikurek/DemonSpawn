@@ -13,7 +13,7 @@ public class PlayerLeftControllerScript : MonoBehaviour {
     public ArrayList pentagramNodes = new ArrayList();
     public GameObject node;
     public Dictionary<int, ArrayList> nodeMap = new Dictionary<int, ArrayList>();
-
+    public DragoatMove dr;
 
 	// Use this for initialization
 	void Start () {
@@ -73,8 +73,9 @@ public class PlayerLeftControllerScript : MonoBehaviour {
 
             if(points >= 4)
             {
-                points = 0;
+                points = 0;                
                 level++;
+                dr.LeftPlayerScored(1);
                 spawnPickups();
                 Debug.Log("Player 1 level: " + level);
             }
