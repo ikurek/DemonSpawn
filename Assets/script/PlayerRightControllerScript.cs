@@ -6,24 +6,32 @@ using UnityEngine;
 public class PlayerRightControllerScript : MonoBehaviour
 {
 
+    // Object
     public int points = 0;
     public int level = 1;
-    public int currentNode = 0;
     public Rigidbody2D body;
+    // Nodes
+    public int currentNode = 0;
     public ArrayList pentagramNodes = new ArrayList();
     public ArrayList pentagramNodeButtons = new ArrayList();
     public GameObject node;
     public Dictionary<int, ArrayList> nodeMap = new Dictionary<int, ArrayList>();
+    // Related boss
     public DragoatMove dr;
+    // Buttons
     public Sprite yButton;
     public Sprite xButton;
     public Sprite aButton;
     public Sprite bButton;
+    // Audio
+    public AudioClip collisionSound;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         buildNodeTable();
         buildNodeButtonsTable();
         Debug.Log("Created Player 2!");
@@ -88,6 +96,9 @@ public class PlayerRightControllerScript : MonoBehaviour
 
         if (coll.gameObject.CompareTag("Pickup"))
         {
+            // Play audio
+            audioSource.PlayOneShot(collisionSound, 0.7F);
+
             // Destroy old pickup
             Destroy(coll.gameObject);
             points++;
