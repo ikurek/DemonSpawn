@@ -9,10 +9,12 @@ public class DragoatMove : MonoBehaviour {
     float StartTime;
     float TotalDistanceToDestination;
     public CthulhuMovement cthulu;
+    public AnimationCurve velocity;
 
 
-	// Use this for initialization
-	protected void Start () {
+
+    // Use this for initialization
+    protected void Start () {
         StartTime = Time.time;
         TotalDistanceToDestination = Vector3.Distance(StartPositionDragoat.position, EndPositionDragoat.position);
 	}
@@ -21,7 +23,7 @@ public class DragoatMove : MonoBehaviour {
 	void Update () {
         float currentDuration = Time.time - StartTime;
         float jorneyFraction = currentDuration / TotalDistanceToDestination;
-        transform.position = Vector3.Lerp(StartPositionDragoat.position, EndPositionDragoat.position, jorneyFraction * 3);
+        transform.position = Vector3.Lerp(StartPositionDragoat.position, EndPositionDragoat.position, velocity.Evaluate(currentDuration * 0.5f));
         //if(Input.GetKeyDown("k"))
         //{
         //    EndPositionDragoat.Translate(2f, 0, 0);//(Vector3.right)
@@ -38,9 +40,24 @@ public class DragoatMove : MonoBehaviour {
         //    TotalDistanceToDestination = Vector3.Distance(StartPositionDragoat.position, EndPositionDragoat.position);
         //    cthulu.SetVariables();
         //}
-        
+
 
     }
+
+    public IEnumerator ScaleObject()
+    {
+        float scaleDuration = 0.5f;                                //animation duration in seconds
+        Vector3 actualScale = transform.localScale;             // scale of the object at the begining of the animation
+        Vector3 targetScale = new Vector3(1.1f, 1.1f, 1.1f);     // scale of the object at the end of the animation
+
+        for (float t = 0; t < 1; t += Time.deltaTime / scaleDuration)
+        {
+            transform.localScale = Vector3.Lerp(actualScale, targetScale, t);
+            yield return null;
+        }
+    }
+
+
 
     public void LeftPlayerScored(int score)
     {
@@ -49,6 +66,7 @@ public class DragoatMove : MonoBehaviour {
         StartTime = Time.time;
         TotalDistanceToDestination = Vector3.Distance(StartPositionDragoat.position, EndPositionDragoat.position);
         cthulu.SetVariables();
+        ScaleObject();
     }
 
     public void RightPlayerScored(int score)
@@ -58,5 +76,6 @@ public class DragoatMove : MonoBehaviour {
         StartTime = Time.time;
         TotalDistanceToDestination = Vector3.Distance(StartPositionDragoat.position, EndPositionDragoat.position);
         cthulu.SetVariables();
+        ScaleObject();
     }
 }
