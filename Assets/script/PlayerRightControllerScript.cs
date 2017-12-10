@@ -107,16 +107,16 @@ public class PlayerRightControllerScript : MonoBehaviour
     {
 
         // Map all node positions
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node0"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node1"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node2"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node3"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node4"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node5"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node6"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node7"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node8"));
-        pentagramNodes.Add(GameObject.Find("PentagramRight/Node9"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node0"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node1"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node2"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node3"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node4"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node5"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node6"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node7"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node8"));
+        pentagramNodes.Add(GameObject.Find("PentagramLeft/Node9"));
 
         // Neighbourgh list for every node
         ArrayList listOf0 = new ArrayList();
@@ -130,10 +130,10 @@ public class PlayerRightControllerScript : MonoBehaviour
         ArrayList listOf8 = new ArrayList();
         ArrayList listOf9 = new ArrayList();
 
-        listOf0.Add(pentagramNodes[0]);
         listOf0.Add(pentagramNodes[1]);
         listOf0.Add(pentagramNodes[2]);
         listOf0.Add(pentagramNodes[3]);
+        listOf0.Add(pentagramNodes[4]);
 
         listOf1.Add(pentagramNodes[0]);
         listOf1.Add(pentagramNodes[2]);
@@ -157,8 +157,8 @@ public class PlayerRightControllerScript : MonoBehaviour
 
         listOf5.Add(pentagramNodes[1]);
         listOf5.Add(pentagramNodes[2]);
+        listOf5.Add(pentagramNodes[7]);
         listOf5.Add(pentagramNodes[8]);
-        listOf5.Add(pentagramNodes[9]);
 
         listOf6.Add(pentagramNodes[3]);
         listOf6.Add(pentagramNodes[4]);
