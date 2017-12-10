@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CthulhuMovement : MonoBehaviour
 {
-
     public Transform StartPositionCthulhu;
     public Transform EndPositionCthulhu;
     float StartTime;

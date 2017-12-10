@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 9a680b0e6dacdf24e9caae65987140bd
 timeCreated: 1512907000
+=======
+guid: 5da06b3d6524163469f5fa60d0472a86
+timeCreated: 1512906723
+>>>>>>> MonsterBrawling1.2
 licenseType: Free
 AudioImporter:
   externalObjects: {}

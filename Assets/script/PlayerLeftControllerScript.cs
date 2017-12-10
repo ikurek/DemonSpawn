@@ -266,6 +266,11 @@ public class PlayerLeftControllerScript : MonoBehaviour {
         }
     }
 
+    public float getLevel()
+    {
+        return level;
+    }
+
     private void clearCandles()
     {
         foreach(GameObject node in pentagramNodes)
