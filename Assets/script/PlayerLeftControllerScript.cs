@@ -247,4 +247,9 @@ public class PlayerLeftControllerScript : MonoBehaviour {
             button.GetComponent<SpriteRenderer>().sprite = new Sprite();
         }
     }
+
+    public float getLevel()
+    {
+        return level;
+    }
 }

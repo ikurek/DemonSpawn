@@ -14,7 +14,6 @@ public class ScreenShake : MonoBehaviour {
             mainCam = Camera.main;
     }
     
-	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey("y"))

@@ -8,7 +8,7 @@ public class PlayerRightControllerScript : MonoBehaviour
 
     // Object
     public int points = 0;
-    public int level = 1;
+    public float level = 1;
     public Rigidbody2D body;
     // Nodes
     public int currentNode = 0;
@@ -246,5 +246,10 @@ public class PlayerRightControllerScript : MonoBehaviour
         {
             button.GetComponent<SpriteRenderer>().sprite = new Sprite();
         }
+    }
+
+    public float getLevel()
+    {
+        return level;
     }
 }
