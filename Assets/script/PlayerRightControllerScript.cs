@@ -26,6 +26,9 @@ public class PlayerRightControllerScript : MonoBehaviour
     // Audio
     public AudioClip collisionSound;
     private AudioSource audioSource;
+    // Candles
+    public Sprite candleOn;
+    public Sprite candleOff;
 
     // Use this for initialization
     void Start()
@@ -38,6 +41,7 @@ public class PlayerRightControllerScript : MonoBehaviour
         spawnPickups();
         clearButtonRoutes();
         updateButtonRoutes(nodeMap[currentNode]);
+
     }
 
     // Update is called once per frame
@@ -100,6 +104,8 @@ public class PlayerRightControllerScript : MonoBehaviour
             audioSource.PlayOneShot(collisionSound, 0.7F);
 
             // Destroy old pickup
+            GameObject nodeToLightCandle = coll.gameObject.GetComponent<PickupControllerScript>().spawnNode;
+            nodeToLightCandle.GetComponent<SpriteRenderer>().sprite = candleOn;
             Destroy(coll.gameObject);
             points++;
 
@@ -223,10 +229,21 @@ public class PlayerRightControllerScript : MonoBehaviour
     {
         var rng = new System.Random();
 
-        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
-        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
-        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
-        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+        GameObject node0 = pentagramNodes[rng.Next(0, 10)] as GameObject;
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(node0);
+        node0.GetComponent<SpriteRenderer>().sprite = candleOff;
+
+        GameObject node1 = pentagramNodes[rng.Next(0, 10)] as GameObject;
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(node1);
+        node1.GetComponent<SpriteRenderer>().sprite = candleOff;
+
+        GameObject node2 = pentagramNodes[rng.Next(0, 10)] as GameObject;
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(node2);
+        node2.GetComponent<SpriteRenderer>().sprite = candleOff;
+
+        GameObject node3 = pentagramNodes[rng.Next(0, 10)] as GameObject;
+        (Instantiate(GameObject.Find("PentagramRight/PickupRight") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(node3);
+        node3.GetComponent<SpriteRenderer>().sprite = candleOff;
     }
 
     private void updateButtonRoutes(ArrayList availableNodes)
@@ -245,6 +262,14 @@ public class PlayerRightControllerScript : MonoBehaviour
         foreach (GameObject button in pentagramNodeButtons)
         {
             button.GetComponent<SpriteRenderer>().sprite = new Sprite();
+        }
+    }
+
+    private void clearCandles()
+    {
+        foreach (GameObject node in pentagramNodes)
+        {
+            node.GetComponent<SpriteRenderer>().sprite = candleOn;
         }
     }
 }
