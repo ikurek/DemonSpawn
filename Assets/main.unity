@@ -251,6 +251,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPositionCthulhu: {fileID: 1946194240}
   EndPositionCthulhu: {fileID: 192477849}
+  velocity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5605155
+      value: 0.6142027
+      inSlope: 1.321137
+      outSlope: 1.321137
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.70857716
+      value: 0.9986973
+      inSlope: 0.0059050852
+      outSlope: 0.0059050852
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.79997355
+      value: 0.79964566
+      inSlope: 0.0047683716
+      outSlope: 0.0047683716
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &83107499
 Transform:
   m_ObjectHideFlags: 0
@@ -554,6 +590,42 @@ MonoBehaviour:
   StartPositionDragoat: {fileID: 1028942606}
   EndPositionDragoat: {fileID: 192477849}
   cthulu: {fileID: 83107498}
+  velocity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5605155
+      value: 0.6142027
+      inSlope: 1.321137
+      outSlope: 1.321137
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.70857716
+      value: 0.9986973
+      inSlope: 0.0059050852
+      outSlope: 0.0059050852
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.79997355
+      value: 0.79964566
+      inSlope: 0.0047683716
+      outSlope: 0.0047683716
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &131736446
 Transform:
   m_ObjectHideFlags: 0
@@ -715,11 +787,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4044612490746498, guid: 78906d24b8c206c4bbd357f9c0a5d725, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -12.1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4044612490746498, guid: 78906d24b8c206c4bbd357f9c0a5d725, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4044612490746498, guid: 78906d24b8c206c4bbd357f9c0a5d725, type: 2}
       propertyPath: m_LocalPosition.z
