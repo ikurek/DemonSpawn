@@ -11,16 +11,24 @@ public class PlayerLeftControllerScript : MonoBehaviour {
     public int currentNode = 0;
     public Rigidbody2D body;
     public ArrayList pentagramNodes = new ArrayList();
+    public ArrayList pentagramNodeButtons = new ArrayList();
     public GameObject node;
     public Dictionary<int, ArrayList> nodeMap = new Dictionary<int, ArrayList>();
     public DragoatMove dr;
+    public Sprite yButton;
+    public Sprite xButton;
+    public Sprite aButton;
+    public Sprite bButton;
 
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody2D>();
         buildNodeTable();
+        buildNodeButtonsTable();
         Debug.Log("Created Player 1!");
         spawnPickups();
+        clearButtonRoutes();
+        updateButtonRoutes(nodeMap[currentNode]);
     }
 
     // Update is called once per frame
@@ -37,27 +45,38 @@ public class PlayerLeftControllerScript : MonoBehaviour {
                     case KeyCode.A:
                         node = availableNodes[1] as GameObject;
                         currentNode = pentagramNodes.IndexOf(node);
+                        availableNodes = nodeMap[currentNode];
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
+
                         break;
 
                     case KeyCode.W:
                         node = availableNodes[0] as GameObject;
                         currentNode = pentagramNodes.IndexOf(node);
+                        availableNodes = nodeMap[currentNode];
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
+
                         break;
 
                     case KeyCode.D:
                         node = availableNodes[2] as GameObject;
                         currentNode = pentagramNodes.IndexOf(node);
+                        availableNodes = nodeMap[currentNode];
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
+
                         break;
 
                     case KeyCode.S:
                         node = availableNodes[3] as GameObject;
                         currentNode = pentagramNodes.IndexOf(node);
+                        availableNodes = nodeMap[currentNode];
                         body.position = new Vector2(node.transform.position.x, node.transform.position.y);
+
                         break;
                 }
+
+                clearButtonRoutes();
+                updateButtonRoutes(availableNodes);
             }
         }
     }
@@ -110,10 +129,10 @@ public class PlayerLeftControllerScript : MonoBehaviour {
         ArrayList listOf8 = new ArrayList();
         ArrayList listOf9 = new ArrayList();
 
-        listOf0.Add(pentagramNodes[0]);
         listOf0.Add(pentagramNodes[1]);
         listOf0.Add(pentagramNodes[2]);
         listOf0.Add(pentagramNodes[3]);
+        listOf0.Add(pentagramNodes[4]);
 
         listOf1.Add(pentagramNodes[0]);
         listOf1.Add(pentagramNodes[2]);
@@ -137,8 +156,8 @@ public class PlayerLeftControllerScript : MonoBehaviour {
     
         listOf5.Add(pentagramNodes[1]);
         listOf5.Add(pentagramNodes[2]);
+        listOf5.Add(pentagramNodes[7]);
         listOf5.Add(pentagramNodes[8]);
-        listOf5.Add(pentagramNodes[9]);
 
         listOf6.Add(pentagramNodes[3]);
         listOf6.Add(pentagramNodes[4]);
@@ -174,6 +193,20 @@ public class PlayerLeftControllerScript : MonoBehaviour {
 
     }
 
+    private void buildNodeButtonsTable()
+    {
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node0Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node1Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node2Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node3Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node4Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node5Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node6Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node7Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node8Button") as GameObject);
+        pentagramNodeButtons.Add(GameObject.Find("PentagramLeft/Node9Button") as GameObject);
+    }
+
     private void spawnPickups()
     {
         var rng = new System.Random();
@@ -182,5 +215,24 @@ public class PlayerLeftControllerScript : MonoBehaviour {
         (Instantiate(GameObject.Find("PentagramLeft/PickupLeft") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
         (Instantiate(GameObject.Find("PentagramLeft/PickupLeft") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
         (Instantiate(GameObject.Find("PentagramLeft/PickupLeft") as GameObject)).GetComponent<PickupControllerScript>().setRelatedNode(pentagramNodes[rng.Next(0, 10)] as GameObject);
+    }
+
+    private void updateButtonRoutes(ArrayList availableNodes)
+    {
+
+        Debug.Log("Updating buttons");
+        (pentagramNodeButtons[pentagramNodes.IndexOf(availableNodes[0])] as GameObject).GetComponent<SpriteRenderer>().sprite = yButton;
+        (pentagramNodeButtons[pentagramNodes.IndexOf(availableNodes[1])] as GameObject).GetComponent<SpriteRenderer>().sprite = xButton;
+        (pentagramNodeButtons[pentagramNodes.IndexOf(availableNodes[2])] as GameObject).GetComponent<SpriteRenderer>().sprite = aButton;
+        (pentagramNodeButtons[pentagramNodes.IndexOf(availableNodes[3])] as GameObject).GetComponent<SpriteRenderer>().sprite = bButton;
+
+    }
+
+    private void clearButtonRoutes()
+    {
+        foreach (GameObject button in pentagramNodeButtons)
+        {
+            button.GetComponent<SpriteRenderer>().sprite = new Sprite();
+        }
     }
 }
