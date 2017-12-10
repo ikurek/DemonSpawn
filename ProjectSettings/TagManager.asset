@@ -9,6 +9,7 @@ TagManager:
   - PickupDestination1
   - PickupDestination2
   - FieldLeft
+  - MonsterDragoat
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: rooftops
+    uniqueID: 3854992375
+    locked: 0
+  - name: monsters
+    uniqueID: 3105336259
     locked: 0
